@@ -12,9 +12,10 @@
 		04B2CA7522FBD33900910862 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04B2CA7422FBD33900910862 /* Assets.xcassets */; };
 		04B2CA7822FBD33900910862 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B2CA7622FBD33900910862 /* LaunchScreen.storyboard */; };
 		04B2CA8122FBD43500910862 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2CA8022FBD43500910862 /* Utilities.swift */; };
-		04B2CA8322FBD4DD00910862 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B2CA8222FBD4DD00910862 /* Default-568h@2x.png */; };
 		04B2CA8522FBD9A800910862 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2CA8422FBD9A800910862 /* Planning.swift */; };
-		04B2CA8722FBED1D00910862 /* ImageGalleryDocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2CA8622FBED1D00910862 /* ImageGalleryDocumentTableViewController.swift */; };
+		04C90BF823027720006D0632 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C90BF723027720006D0632 /* ImageViewController.swift */; };
+		04C90BFA23027D6A006D0632 /* campanile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04C90BF923027D6A006D0632 /* campanile.jpg */; };
+		04C90BFC23027DA2006D0632 /* DemoURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C90BFB23027DA2006D0632 /* DemoURLs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,9 +26,10 @@
 		04B2CA7722FBD33900910862 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04B2CA7922FBD33900910862 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04B2CA8022FBD43500910862 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		04B2CA8222FBD4DD00910862 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		04B2CA8422FBD9A800910862 /* Planning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planning.swift; sourceTree = "<group>"; };
-		04B2CA8622FBED1D00910862 /* ImageGalleryDocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryDocumentTableViewController.swift; sourceTree = "<group>"; };
+		04C90BF723027720006D0632 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		04C90BF923027D6A006D0632 /* campanile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = campanile.jpg; path = ../../../Pictures/campanile.jpg; sourceTree = "<group>"; };
+		04C90BFB23027DA2006D0632 /* DemoURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoURLs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +46,6 @@
 		04B2CA6122FBD33700910862 = {
 			isa = PBXGroup;
 			children = (
-				04B2CA8222FBD4DD00910862 /* Default-568h@2x.png */,
 				04B2CA6C22FBD33700910862 /* ImageGallery */,
 				04B2CA6B22FBD33700910862 /* Products */,
 			);
@@ -61,9 +62,11 @@
 		04B2CA6C22FBD33700910862 /* ImageGallery */ = {
 			isa = PBXGroup;
 			children = (
-				04B2CA8622FBED1D00910862 /* ImageGalleryDocumentTableViewController.swift */,
 				04B2CA8022FBD43500910862 /* Utilities.swift */,
 				04B2CA7122FBD33700910862 /* Main.storyboard */,
+				04C90BF723027720006D0632 /* ImageViewController.swift */,
+				04C90BF923027D6A006D0632 /* campanile.jpg */,
+				04C90BFB23027DA2006D0632 /* DemoURLs.swift */,
 				04B2CA7F22FBD38800910862 /* Supporting Files */,
 				04B2CA7922FBD33900910862 /* Info.plist */,
 				04B2CA8422FBD9A800910862 /* Planning.swift */,
@@ -140,8 +143,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B2CA7822FBD33900910862 /* LaunchScreen.storyboard in Resources */,
-				04B2CA8322FBD4DD00910862 /* Default-568h@2x.png in Resources */,
 				04B2CA7522FBD33900910862 /* Assets.xcassets in Resources */,
+				04C90BFA23027D6A006D0632 /* campanile.jpg in Resources */,
 				04B2CA7322FBD33700910862 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,8 +157,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B2CA8522FBD9A800910862 /* Planning.swift in Sources */,
-				04B2CA8722FBED1D00910862 /* ImageGalleryDocumentTableViewController.swift in Sources */,
 				04B2CA8122FBD43500910862 /* Utilities.swift in Sources */,
+				04C90BFC23027DA2006D0632 /* DemoURLs.swift in Sources */,
+				04C90BF823027720006D0632 /* ImageViewController.swift in Sources */,
 				04B2CA6E22FBD33700910862 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
