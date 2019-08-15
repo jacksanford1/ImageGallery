@@ -31,7 +31,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             imageView.sizeToFit()
             // sets the content size for scrolling
             // otherwise scroll would not work in a (0,0) frame
+            // question marks are so that these work in a prepare func
             scrollView?.contentSize = imageView.frame.size
+            spinner?.stopAnimating()
         }
     }
     
@@ -44,6 +46,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.minimumZoomScale = 1/25
@@ -62,14 +66,17 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     private func fetchImage() {
         // checking to see if URL is non-nil
         if let url = imageURL {
+            spinner.startAnimating()
             // do weak self here because otherwise if you navigate away from
             // this viewController this code will still keep this VC in the heap
-//            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 let urlContents = try? Data(contentsOf: url)
-                if let imageData = urlContents {
-                    self.image = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    if let imageData = urlContents, url == self?.imageURL {
+                        self?.image = UIImage(data: imageData)
+                    }
                 }
-//            }
+            }
         }
     }
     

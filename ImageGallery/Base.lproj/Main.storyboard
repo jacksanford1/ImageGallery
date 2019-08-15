@@ -16,7 +16,7 @@
                 <splitViewController id="f4G-Pa-Xn3" sceneMemberID="viewController">
                     <connections>
                         <segue destination="PBD-Ck-yyn" kind="relationship" relationship="masterViewController" id="Mrl-1d-MIa"/>
-                        <segue destination="YFw-vY-iUy" kind="relationship" relationship="detailViewController" id="g9N-1q-Yqm"/>
+                        <segue destination="RHI-X0-qK7" kind="relationship" relationship="detailViewController" id="g9N-1q-Yqm"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FYM-TE-ESv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -49,7 +49,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="YFw-vY-iUy" kind="showDetail" identifier="ShowImageSegue" id="GVJ-rZ-e68"/>
+                                    <segue destination="RHI-X0-qK7" kind="showDetail" identifier="ShowImageSegue" id="GVJ-rZ-e68"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -81,23 +81,31 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LuC-vT-qql">
                                 <rect key="frame" x="0.0" y="0.0" width="990.5" height="1024"/>
                             </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ngi-dj-3cA">
+                                <rect key="frame" x="477" y="520.5" width="37" height="37"/>
+                                <color key="color" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Ngi-dj-3cA" firstAttribute="centerX" secondItem="qBx-lD-dsf" secondAttribute="centerX" id="G20-5e-cAc"/>
                             <constraint firstItem="LuC-vT-qql" firstAttribute="top" secondItem="iPM-JA-dkm" secondAttribute="top" id="Ixk-hf-DsC"/>
                             <constraint firstItem="LuC-vT-qql" firstAttribute="leading" secondItem="iPM-JA-dkm" secondAttribute="leading" id="Xfo-lJ-Ayp"/>
                             <constraint firstAttribute="trailing" secondItem="LuC-vT-qql" secondAttribute="trailing" id="gmv-8p-UjQ"/>
                             <constraint firstItem="LuC-vT-qql" firstAttribute="bottom" secondItem="iPM-JA-dkm" secondAttribute="bottom" id="nar-SU-nV6"/>
+                            <constraint firstItem="Ngi-dj-3cA" firstAttribute="centerY" secondItem="qBx-lD-dsf" secondAttribute="centerY" id="xuA-JW-J5V"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qBx-lD-dsf"/>
                     </view>
+                    <navigationItem key="navigationItem" id="fxu-8t-XoB"/>
                     <connections>
                         <outlet property="scrollView" destination="LuC-vT-qql" id="pg3-U0-qgE"/>
+                        <outlet property="spinner" destination="Ngi-dj-3cA" id="nE5-wp-sfr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hx1-9o-jdq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-82.137628111273784" y="-35.15625"/>
+            <point key="canvasLocation" x="611.85944363103954" y="-35.15625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SDq-NR-YPd">
@@ -116,6 +124,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ug-ux-kOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-82.137628111273784" y="-755.2734375"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="F8U-ob-KP0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RHI-X0-qK7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nSs-bo-svM">
+                        <rect key="frame" x="0.0" y="24" width="990.5" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YFw-vY-iUy" kind="relationship" relationship="rootViewController" id="LYR-Z6-sXl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LFV-I1-l3R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-82.137628111273784" y="-35.15625"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

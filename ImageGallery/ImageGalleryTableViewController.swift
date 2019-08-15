@@ -95,7 +95,6 @@ class ImageGalleryTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifier,
-            let destination = segue.destination as? ImageViewController,
             let imageIndex = tableView.indexPathForSelectedRow?.row {
             var identifier: String
             switch imageIndex {
@@ -105,8 +104,14 @@ class ImageGalleryTableViewController: UITableViewController {
             default : identifier = "False"; print("Didn't work")
             }
             if let url = DemoURLs.NASA[identifier] {
-                destination.imageURL = url
-                destination.title = identifier
+                var destination = segue.destination
+                if let navcon = destination as? UINavigationController {
+                    destination = navcon.visibleViewController ?? navcon
+                }
+                if let imageVC = destination as? ImageViewController {
+                    imageVC.imageURL = url
+                    imageVC.title = identifier
+                }
             }
         }
     }
