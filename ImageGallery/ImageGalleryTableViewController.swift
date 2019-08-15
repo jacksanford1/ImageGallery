@@ -77,25 +77,13 @@ class ImageGalleryTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        var identifier: String
-//        switch indexPath.row {
-//        case 0 : identifier = "Cassini"
-//        case 1 : identifier = "Pattern"
-//        case 2 : identifier = "Santigold"
-//        default : identifier = "False"; print("Didn't work")
-//        }
-//
-//        let VC = ImageViewController
-//
-//    }
-    
-    let segueIdentifier = "ShowImageSegue"
+    let segueIdentifier = "ShowCollectionSegue"
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        print("Segue identifier is \(segueIdentifier)")
         if segue.identifier == segueIdentifier,
             let imageIndex = tableView.indexPathForSelectedRow?.row {
+//            print ("imageIndex is \(imageIndex)")
             var identifier: String
             switch imageIndex {
             case 0 : identifier = imageGalleryDocuments[0]
@@ -103,14 +91,20 @@ class ImageGalleryTableViewController: UITableViewController {
             case 2 : identifier = imageGalleryDocuments[2]
             default : identifier = "False"; print("Didn't work")
             }
-            if let url = DemoURLs.NASA[identifier] {
+//            print("identifier is \(identifier)")
+            var demoURLstruct = DemoURLs()
+            if let urls = demoURLstruct.artists[identifier] {
+//                print("url is \(url)")
                 var destination = segue.destination
+//                print("destination is \(destination)")
                 if let navcon = destination as? UINavigationController {
                     destination = navcon.visibleViewController ?? navcon
+//                    print("New destination is \(destination)")
                 }
-                if let imageVC = destination as? ImageViewController {
-                    imageVC.imageURL = url
-                    imageVC.title = identifier
+                if let imageVC = destination as? ImageGalleryCollectionViewController {
+//                    print("imageVC is \(imageVC)")
+                    imageVC.currentArtist = urls as? [URL]
+//                    print("Newly set imageURL is \(imageVC.imageURL!)")
                 }
             }
         }
