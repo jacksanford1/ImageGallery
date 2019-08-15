@@ -16,6 +16,7 @@
 		04C90BF823027720006D0632 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C90BF723027720006D0632 /* ImageViewController.swift */; };
 		04C90BFA23027D6A006D0632 /* campanile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04C90BF923027D6A006D0632 /* campanile.jpg */; };
 		04C90BFC23027DA2006D0632 /* DemoURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C90BFB23027DA2006D0632 /* DemoURLs.swift */; };
+		04C90C002303B216006D0632 /* ImageGalleryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C90BFF2303B216006D0632 /* ImageGalleryTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		04C90BF723027720006D0632 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		04C90BF923027D6A006D0632 /* campanile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = campanile.jpg; path = ../../../Pictures/campanile.jpg; sourceTree = "<group>"; };
 		04C90BFB23027DA2006D0632 /* DemoURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoURLs.swift; sourceTree = "<group>"; };
+		04C90BFF2303B216006D0632 /* ImageGalleryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		04B2CA6C22FBD33700910862 /* ImageGallery */ = {
 			isa = PBXGroup;
 			children = (
+				04C90BFF2303B216006D0632 /* ImageGalleryTableViewController.swift */,
 				04B2CA8022FBD43500910862 /* Utilities.swift */,
 				04B2CA7122FBD33700910862 /* Main.storyboard */,
 				04C90BF723027720006D0632 /* ImageViewController.swift */,
@@ -158,6 +161,7 @@
 			files = (
 				04B2CA8522FBD9A800910862 /* Planning.swift in Sources */,
 				04B2CA8122FBD43500910862 /* Utilities.swift in Sources */,
+				04C90C002303B216006D0632 /* ImageGalleryTableViewController.swift in Sources */,
 				04C90BFC23027DA2006D0632 /* DemoURLs.swift in Sources */,
 				04C90BF823027720006D0632 /* ImageViewController.swift in Sources */,
 				04B2CA6E22FBD33700910862 /* AppDelegate.swift in Sources */,

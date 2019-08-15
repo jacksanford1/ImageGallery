@@ -31,7 +31,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             imageView.sizeToFit()
             // sets the content size for scrolling
             // otherwise scroll would not work in a (0,0) frame
-            scrollView.contentSize = imageView.frame.size
+            scrollView?.contentSize = imageView.frame.size
         }
     }
     
@@ -62,19 +62,22 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     private func fetchImage() {
         // checking to see if URL is non-nil
         if let url = imageURL {
-            let urlContents = try? Data(contentsOf: url)
-            if let imageData = urlContents {
-                image = UIImage(data: imageData)
-            }
-            
+            // do weak self here because otherwise if you navigate away from
+            // this viewController this code will still keep this VC in the heap
+//            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let urlContents = try? Data(contentsOf: url)
+                if let imageData = urlContents {
+                    self.image = UIImage(data: imageData)
+                }
+//            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if imageURL == nil {
-            imageURL  = DemoURLs.berkeley
-        }
+//        if imageURL == nil {
+//            imageURL  = DemoURLs.berkeley
+//        }
     }
     
 
