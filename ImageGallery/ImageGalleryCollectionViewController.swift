@@ -34,7 +34,6 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
         }
     }
     
-    
     var imageView = UIImageView()
     
 //    var selectedImage: UIImage?
@@ -86,7 +85,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return loadedImages.count
+        return currentArtist?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,9 +94,11 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
         
         // Configure the cell
 //        print("imageURL starts out as \(String(describing: imageURL))")
-        if loadedImages.count > 0 {
+        cell.spinner.startAnimating()
+        if indexPath.item + 1 <= loadedImages.count {
             image = loadedImages[indexPath.item]
             cell.imageView.image = image
+            cell.spinner.stopAnimating()
 //            print("image is \(String(describing: image))")
         }
         return cell
