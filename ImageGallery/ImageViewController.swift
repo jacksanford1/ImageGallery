@@ -10,18 +10,6 @@ import UIKit
 
 class ImageViewController: UIViewController, UIScrollViewDelegate {
     
-//    var imageURL: URL? {
-//        didSet {
-//            image = nil
-//
-//            // way of checking that the view is onscreen
-//            if view.window != nil {
-//                fetchImage()
-//            }
-//
-//        }
-//    }
-    
     var finalImage: UIImage? {
         get {
             return imageView.image
@@ -37,13 +25,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    // when the window does come onscreen
-    // want to load the image
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        if imageView.image == nil {
-//            fetchImage()
-//        }
     }
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -62,23 +46,5 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     }
     
     var imageView = UIImageView()
-    
-//    private func fetchImage() {
-//        // checking to see if URL is non-nil
-//        if let url = imageURL {
-//            spinner.startAnimating()
-//            // do weak self here because otherwise if you navigate away from
-//            // this viewController this code will still keep this VC in the heap
-//            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-//                let urlContents = try? Data(contentsOf: url)
-//                DispatchQueue.main.async {
-//                    if let imageData = urlContents, url == self?.imageURL {
-//                        self?.image = UIImage(data: imageData)
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
 
 }

@@ -52,6 +52,33 @@
                                     <segue destination="w6j-jl-zg8" kind="showDetail" identifier="ShowCollectionSegue" id="mCb-Pj-Qnk"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" textLabel="rUh-8s-mXv" style="IBUITableViewCellStyleDefault" id="LAS-8x-3Il" customClass="TextFieldTableViewCell" customModule="ImageGallery" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="80" width="375" height="52"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LAS-8x-3Il" id="3Za-gM-dkR">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LEg-Wf-qvW">
+                                            <rect key="frame" x="16" y="10" width="200" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rUh-8s-mXv">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="51.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textField" destination="LEg-Wf-qvW" id="uwJ-0h-yuK"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="mjc-6l-gO0" id="dZF-UI-z1y"/>
@@ -78,36 +105,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="990.5" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IxK-YV-2m9">
-                            <size key="itemSize" width="800" height="800"/>
+                            <size key="itemSize" width="400" height="800"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="collectionCell" id="ir9-RU-NHQ" customClass="IGCollectionViewCell" customModule="ImageGallery" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="65" width="800" height="800"/>
+                                <rect key="frame" x="0.0" y="65" width="400" height="800"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="800" height="800"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z8U-bO-z32">
-                                            <rect key="frame" x="0.0" y="0.0" width="800" height="800"/>
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z8U-bO-z32">
+                                            <rect key="frame" x="25" y="0.0" width="400" height="800"/>
+                                            <gestureRecognizers/>
                                         </imageView>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="JVa-xr-6D4">
-                                            <rect key="frame" x="-95.5" y="-112" width="990.5" height="1024"/>
+                                            <rect key="frame" x="-296.76479932010352" y="-111.54370540287846" width="990.49999999999932" height="1024"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </activityIndicatorView>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="z8U-bO-z32" firstAttribute="top" secondItem="ir9-RU-NHQ" secondAttribute="top" id="6DJ-5G-rcf"/>
-                                    <constraint firstItem="z8U-bO-z32" firstAttribute="leading" secondItem="ir9-RU-NHQ" secondAttribute="leading" id="Dki-cx-lzV"/>
-                                    <constraint firstAttribute="trailing" secondItem="z8U-bO-z32" secondAttribute="trailing" id="kEd-48-rk5"/>
-                                    <constraint firstAttribute="bottom" secondItem="z8U-bO-z32" secondAttribute="bottom" id="sEi-eZ-2oh"/>
+                                    <constraint firstItem="z8U-bO-z32" firstAttribute="top" secondItem="ir9-RU-NHQ" secondAttribute="top" id="6lo-A7-T5V"/>
+                                    <constraint firstAttribute="width" secondItem="z8U-bO-z32" secondAttribute="width" id="DSc-Fr-Q7R"/>
+                                    <constraint firstItem="z8U-bO-z32" firstAttribute="leading" secondItem="ir9-RU-NHQ" secondAttribute="leading" id="Hg6-UL-jkv"/>
+                                    <constraint firstAttribute="trailing" secondItem="z8U-bO-z32" secondAttribute="trailing" id="Ue7-MB-7BH"/>
+                                    <constraint firstAttribute="height" secondItem="z8U-bO-z32" secondAttribute="height" id="XkD-pk-Xv6"/>
+                                    <constraint firstAttribute="bottom" secondItem="z8U-bO-z32" secondAttribute="bottom" id="q9P-q8-vDZ"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="z8U-bO-z32" id="sj7-fg-342"/>
@@ -115,15 +147,43 @@
                                     <segue destination="RHI-X0-qK7" kind="showDetail" identifier="ShowImageView" id="lUa-8N-Ce4"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="DropPlaceholderCell" id="ED2-JB-KcB" customClass="IGCollectionViewCell" customModule="ImageGallery" customModuleProvider="target">
+                                <rect key="frame" x="410" y="65" width="400" height="800"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="tmK-Qf-c9D">
+                                            <rect key="frame" x="-296.76479932010352" y="-111.54370540287846" width="990.49999999999932" height="1024"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="spinner" destination="tmK-Qf-c9D" id="R8Q-qy-iBm"/>
+                                </connections>
+                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="oeV-37-xLq" id="Zr7-PO-AW2"/>
                             <outlet property="delegate" destination="oeV-37-xLq" id="wVt-P6-IDI"/>
+                            <outletCollection property="gestureRecognizers" destination="nf1-ie-PUO" appends="YES" id="oM7-eF-MU3"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="6a0-8C-Vfd"/>
+                    <connections>
+                        <outlet property="collectionViewDropZone" destination="jCq-uO-DMA" id="1YT-8g-UAm"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZG-tj-Bva" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="nf1-ie-PUO">
+                    <connections>
+                        <action selector="pinchGesture:" destination="oeV-37-xLq" id="jsR-I2-bGF"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="611.85944363103954" y="-35.15625"/>
         </scene>
@@ -220,6 +280,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="WYt-nn-XML"/>
+        <segue reference="mCb-Pj-Qnk"/>
     </inferredMetricsTieBreakers>
 </document>

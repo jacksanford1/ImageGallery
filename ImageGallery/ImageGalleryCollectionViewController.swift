@@ -10,12 +10,25 @@ import UIKit
 
 private let reuseIdentifier = "collectionCell"
 
-class ImageGalleryCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate {
+// Add empty arrays up here and create a function that converts url strings into urls?
+
+class ImageGalleryCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate, UIDropInteractionDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
     }
-
+    
+    // MARK: Update Model
+    
+    var ImageGalleryTableViewController: ImageGalleryTableViewController?
+    
+    func addDroppedURL(of url: URL, artist: String) {
+        ImageGalleryTableViewController?.addURL(for: url, artist: artist)
+    }
     
     // MARK: - Navigation
 
@@ -34,18 +47,178 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
         }
     }
     
-    var imageView = UIImageView()
+    // MARK: - Maximum Collection View Item Width
     
-//    var selectedImage: UIImage?
+    private var maximumItemWidth: CGFloat? {
+        return collectionView?.frame.size.width
+    }
     
-    var currentArtist: [URL]? {
-        didSet {
-//            print("currentArtist got set")
-            fetchCurrentArtistImages()
+    // MARK: - Minimum Collection View Item Width
+    
+    private var minimumItemWidth: CGFloat? {
+        guard let collectionView = collectionView else {return nil}
+        return (collectionView.frame.size.width / 2) - 5
+    }
+    
+    // MARK: - Width of each cell in collection view
+    
+    private lazy var itemWidth: CGFloat = {
+        return minimumItemWidth ?? 0
+    }()
+    
+    // MARK: - Collection View's Flow Layout
+    
+    private var flowLayout: UICollectionViewFlowLayout? {
+        return collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
+    }
+    
+    // MARK: - Pinch Gesture for Collection View Cell
+    
+    @IBAction func pinchGesture(_ sender: UIPinchGestureRecognizer) {
+        guard let maximumItemWidth = maximumItemWidth else {return}
+        guard let minimumItemWidth = minimumItemWidth else {return}
+        guard itemWidth <= maximumItemWidth else {return}
+        
+        if sender.state == .began || sender.state == .changed {
+            let scaledWidth = itemWidth * sender.scale
+            
+            if scaledWidth <= maximumItemWidth,
+                scaledWidth >= minimumItemWidth {
+                itemWidth = scaledWidth
+                flowLayout?.invalidateLayout()
+            }
+            sender.scale = 1
+        }
+        
+    }
+    
+    // MARK: - Flow Layout Delegate
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // Calculate the image's height based on calc'd aspect ratio
+        if let loadedImage = loadedImages[indexPath.item] {
+            let imageHeight = loadedImage.size.height
+            let imageWidth = loadedImage.size.width
+            let imageAspectRatio = (imageWidth/imageHeight)
+            let scaledImageHeight = itemWidth / imageAspectRatio
+            if scaledImageHeight >= ((collectionView.frame.size.height / 2) - 5) {
+                return CGSize(width: itemWidth, height: scaledImageHeight)
+            }
+            print("itemWidth is \(itemWidth)")
+            print("itemHeight is \(scaledImageHeight)")
+            
+        }
+        // Otherwise just set height to same as item width (1:1 aspect ratio)
+        return CGSize(width: itemWidth, height: itemWidth)
+        
+    }
+    
+    // MARK: LoadView to set Flow Layout
+    
+    override func loadView() {
+        super.loadView()
+        
+//        flowLayout?.minimumLineSpacing = 5
+//        flowLayout?.minimumInteritemSpacing = 5
+    }
+    
+    // MARK: - Drag Items
+    
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        session.localContext = collectionView
+        return dragItems(at: indexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
+        return dragItems(at: indexPath)
+    }
+
+    private func dragItems(at indexPath: IndexPath) -> [UIDragItem] {
+        if let dragImage = (collectionView.cellForItem(at: indexPath) as? IGCollectionViewCell)?.imageView.image {
+            let dragItem = UIDragItem(itemProvider: NSItemProvider(object: dragImage))
+            dragItem.localObject = dragImage
+            return [dragItem]
+        } else {
+            return []
         }
     }
     
-    var loadedImages = [UIImage]()
+    // MARK: - Drop Items
+    
+    @IBOutlet var collectionViewDropZone: UICollectionView! {
+        didSet {
+            collectionViewDropZone.addInteraction(UIDropInteraction(delegate: self))
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+//        print("canHandle drop func gets called")
+        return session.canLoadObjects(ofClass: UIImage.self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        let isSelf = (session.localDragSession?.localContext as? UICollectionView) == collectionView
+//        print("dropSessionDidUpdate func gets called")
+        return UICollectionViewDropProposal(operation: isSelf ? .move : .copy, intent: .insertAtDestinationIndexPath)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+//        print("performDropWith gets called")
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
+        for item in coordinator.items {
+            if let sourceIndexPath = item.sourceIndexPath {
+//                print("item.dragItem.localObject equals \(String(describing: item.dragItem.localObject))")
+                if let image = item.dragItem.localObject as? UIImage {
+//                    print("image is \(image)")
+                    collectionView.performBatchUpdates({
+                        loadedImages.remove(at: sourceIndexPath.item)
+                        loadedImages.insert(image, at: destinationIndexPath.item)
+                        ImageGalleryTableViewController?.artistURLDictionary[selectedArtist!]?.remove(at: sourceIndexPath.item)
+                        ImageGalleryTableViewController?.artistURLDictionary[selectedArtist!]?.insert(currentArtistURLs![sourceIndexPath.item], at: destinationIndexPath.item)
+                        collectionView.deleteItems(at: [sourceIndexPath])
+                        collectionView.insertItems(at: [destinationIndexPath])
+//                        print("loadedImages finishes as \(loadedImages)")
+                    })
+                    coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+                }
+            } else {
+                let placeholderContext = coordinator.drop(item.dragItem, to: UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, reuseIdentifier: "DropPlaceholderCell"))
+                item.dragItem.itemProvider.loadObject(ofClass: NSURL.self, completionHandler: { (provider, error) in
+                    DispatchQueue.main.async {
+                        if let url = provider as? URL {
+                            let cleanURL = url.imageURL
+                                placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
+                                    self.currentArtistURLs!.insert(cleanURL, at: insertionIndexPath.item)
+                                    self.ImageGalleryTableViewController?.artistURLDictionary[self.selectedArtist!]?.insert(cleanURL, at: insertionIndexPath.item)
+                                })
+                            }
+                             else {
+                            placeholderContext.deletePlaceholder()
+                        }
+                    }
+                })
+            }
+        }
+    }
+    
+    var imageView = UIImageView()
+    
+    var selectedArtist: String?
+    
+    var loadedImages = [UIImage?]()
+    
+    var currentArtistURLs: [URL?]? {
+        didSet {
+            loadedImages = []
+//            print("CurrentartistURLs is \(String(describing: currentArtistURLs))")
+            for _ in currentArtistURLs!.indices {
+                loadedImages.append(nil)
+            }
+            fetchCurrentArtistImages()
+        }
+    }
     
     private var image: UIImage? {
         get {
@@ -61,15 +234,23 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
     
     private func fetchCurrentArtistImages() {
 //        print("fetchCurrentArtistImages ran!")
-        for URL in currentArtist! {
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                let urlContents = try? Data(contentsOf: URL)
-                DispatchQueue.main.async {
-                    if let imageData = urlContents {
-                        if let loadedImage = UIImage(data: imageData) {
-                            self?.loadedImages.append(loadedImage)
-                            self?.collectionView.reloadData()
-//                            self?.addTapGestures()
+        for index in currentArtistURLs!.indices {
+            loadedImages[index] = nil
+            if let unwrappedURL = currentArtistURLs![index] {
+                DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                    let urlContents = try? Data(contentsOf: unwrappedURL)
+                    DispatchQueue.main.async {
+//                        print("currentArtistURLs is \(String(describing: self?.currentArtistURLs?.indices))")
+//                        print("loadedImages is \(String(describing: self?.loadedImages.indices))")
+                        if let imageData = urlContents {
+//                            print("imageData is \(imageData)")
+//                            print("UIImage is \(String(describing: UIImage(data: imageData)))")
+                            if let loadedImage = UIImage(data: imageData) {
+//                                print("Index count of loadedImages before fail is \(String(describing: self?.loadedImages.indices))")
+                                self?.loadedImages[index] = loadedImage
+//                                print("Loaded images contains \(String(describing: self?.loadedImages[index]))")
+                                self?.collectionView.reloadData()
+                            }
                         }
                     }
                 }
@@ -85,7 +266,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentArtist?.count ?? 0
+        return currentArtistURLs?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,7 +276,8 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
         // Configure the cell
 //        print("imageURL starts out as \(String(describing: imageURL))")
         cell.spinner.startAnimating()
-        if indexPath.item + 1 <= loadedImages.count {
+        if loadedImages[indexPath.item] != nil {
+//            print("loadedimages.count is \(loadedImages.count)")
             image = loadedImages[indexPath.item]
             cell.imageView.image = image
             cell.spinner.stopAnimating()
