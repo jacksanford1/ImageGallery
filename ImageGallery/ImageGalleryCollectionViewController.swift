@@ -105,13 +105,9 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
             if scaledImageHeight >= ((collectionView.frame.size.height / 2) - 5) {
                 return CGSize(width: itemWidth, height: scaledImageHeight)
             }
-            print("itemWidth is \(itemWidth)")
-            print("itemHeight is \(scaledImageHeight)")
-            
         }
         // Otherwise just set height to same as item width (1:1 aspect ratio)
         return CGSize(width: itemWidth, height: itemWidth)
-        
     }
     
     // MARK: LoadView to set Flow Layout
