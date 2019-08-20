@@ -10,8 +10,6 @@ import UIKit
 
 private let reuseIdentifier = "collectionCell"
 
-// Add empty arrays up here and create a function that converts url strings into urls?
-
 class ImageGalleryCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate, UIDropInteractionDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
