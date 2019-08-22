@@ -131,6 +131,18 @@ extension UIImage
         }
         return nil
     }
+    
+    var aspectRatio: Double {
+        if let cgImage = cgImage {
+            let imageHeight = Double(cgImage.height)
+            let imageWidth = Double(cgImage.width)
+            
+            return Double(imageWidth / imageHeight)
+        } else {
+            return 1
+        }
+    }
+    
 }
 
 extension String {

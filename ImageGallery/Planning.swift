@@ -30,10 +30,33 @@
         - Until we get the UIDocument view working
  
  
+ If I have to make the mode a getter / setter here is the code:
  
+ var gallery: ImageGallery! {
+ get {
+ if let title = document?.localizedName {
+ let images = imagesHandler
+ return ImageGallery(images: images, title: title)
+ }
+ return nil
+ }
+ set {
+ imagesHandler = []
+ imagesHandler = newValue.images
+ gallery.title = newValue.title
+ }
+ }
  
+ // MARK: Exterior images array
  
+ var imagesHandler = [ImageGallery.Image]() {
+ didSet {
+ collectionView?.reloadData()
+ }
+ }
  
+ Then change the image array names back to gallery.images from imagesHandler
+ Put the initializer back into the ImagesGallery Model
  
  
  
