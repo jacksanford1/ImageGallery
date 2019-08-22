@@ -58,9 +58,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
 //                print("document localized name is \(String(describing: self.document?.localizedName))")
 //                print("document gallery is \(String(describing: self.document?.gallery))")
                 if self.gallery == nil && self.document?.gallery == nil {
-                    print("They took the bait!")
                     self.gallery = ImageGallery(images: [], title: self.document?.localizedName ?? "TITLE")
-                    print("After bait, gallery is \(String(describing: self.gallery))")
                 } else {
                     self.gallery = self.document?.gallery
                     self.title = self.document?.localizedName
@@ -280,7 +278,6 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
     }
     
     private func insertImage(_ image: ImageGallery.Image, at indexPath: IndexPath) {
-        print("gallery at insertion is \(String(describing: gallery))")
         gallery?.images.insert(image, at: indexPath.item)
 //        print("gallery?.images is \(String(describing: gallery?.images))")
 //        print("Updated Gallery images count to \(String(describing: gallery?.images.count))")
@@ -300,14 +297,12 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UIGestur
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
-        print("gallery?.images is \(String(describing: gallery?.images))")
         guard let galleryImage = gallery?.images[indexPath.item] else {return cell}
         
         // Configure the cell
         
         if let imageCell = cell as? IGCollectionViewCell {
             imageCell.spinner.startAnimating()
-            print("galleryImage.imageData is \(String(describing: galleryImage.imageData))")
             if let data = galleryImage.imageData, let image = UIImage(data: data) {
                 imageCell.imageView.image = image
                 imageCell.spinner.stopAnimating()
